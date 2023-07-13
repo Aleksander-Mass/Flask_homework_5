@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+    <h1>Новый пользователь</h1>
+    <p>
+        Введите имя: <br />
+        <input name="name" id="name"/>
+    </p>
+     <p>
+        Введите email: <br />
+        <input name="email" id="email"/>
+    </p>
+     <p>
+        Введите пароль: <br />
+        <input name="password" id="password"/>
+    </p>
+       <button onclick="send()">Отправить</button>
+    <script>
+    async function send(){
+        // получаем введеные поля
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        // отправляем запрос
+        const response = await fetch("/add_user", {
+                method: "POST",
+                headers: { "Accept": "application/json", "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    password: password
+                })
+            });
+            if (response.ok) {
+                const data = await response.json();
+                document.getElementById("message").textContent = data.message;
+            }
+            else
+                console.log(response);
+    }
+        </script>
+</body>
+</html>

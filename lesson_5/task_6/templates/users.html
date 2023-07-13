@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+    <h2>Список пользователей</h2>
+    <table>
+    <tr>
+        <th>Имя</th>
+        <th>Email</th>
+    </tr>
+    {% for user in users %}
+        <tr>
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+        </tr>
+    {% endfor %}
+    </table>
+    <a href="{{ url_for('create_new_user') }}">
+        <button class="btn btn-primary" type="add">Добавить</button>
+    </a>
+</body>
+</html>
